@@ -1,0 +1,28 @@
+os: osx
+osx_image: xcode9.2
+compiler: clang
+before_script:
+- ls
+- gem install xcpretty
+- gem install xcpretty-travis-formatter
+- git remote rm origin
+- cd ..
+#grab latest Csound
+- curl -L -o csound6.12.0-OSX-universal.dmg 'https://github.com/csound/csound/releases/download/6.11.0/csound6.11.0-OSX-universal.dmg'
+- ls
+- hdiutil attach csound6.11.0-OSX-universal.dmg
+- cp -R /Volumes/Csound6.11.0/ Csound
+- hdiutil detach /Volumes/Csound6.11.0/
+- cd Csound
+- sudo installer -pkg csound6.11.0-OSX-universal.pkg -target /
+- sudo install_name_tool -id /Library/Frameworks/CsoundLib64.framework/CsoundLib64  /Library/Frameworks/CsoundLib64.framework/CsoundLib64
+- cd /Users/travis/build/rorywalsh/
+- git clone https://github.com/rorywalsh/opcode_sdk.git
+- touch JUCE/
+- cd /Users/travis/build/rorywalsh/opcode_sdk
+
+script:
+- mkdir build
+- cd mkdir
+- cmake ..
+- make -j4
