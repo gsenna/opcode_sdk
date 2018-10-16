@@ -8,7 +8,7 @@ before_script:
 - git remote rm origin
 - cd ..
 #grab latest Csound
-- curl -L -o csound6.12.0-OSX-universal.dmg 'https://github.com/csound/csound/releases/download/6.11.0/csound6.11.0-OSX-universal.dmg'
+- curl -L -o csound6.11.0-OSX-universal.dmg 'https://github.com/csound/csound/releases/download/6.11.0/csound6.11.0-OSX-universal.dmg'
 - ls
 - hdiutil attach csound6.11.0-OSX-universal.dmg
 - cp -R /Volumes/Csound6.11.0/ Csound
