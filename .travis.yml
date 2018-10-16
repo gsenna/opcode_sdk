@@ -2,8 +2,6 @@ os:
   - windows
   - osx
 
-osx_image: xcode9.2
-
 compiler: clang
 before_script:
     if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
