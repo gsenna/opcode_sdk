@@ -16,7 +16,7 @@ before_script:
     hdiutil detach /Volumes/Csound6.11.0/
     cd Csound
     sudo installer -pkg csound6.11.0-OSX-universal.pkg -target /
-    sudo install_name_tool -id /Library/Frameworks/CsoundLib64.framework/CsoundLib64  /Library/Frameworks/CsoundLib64.framework/CsoundLib64
+    #sudo install_name_tool -id /Library/Frameworks/CsoundLib64.framework/CsoundLib64  /Library/Frameworks/CsoundLib64.framework/CsoundLib64
     cd /Users/travis/build/rorywalsh/opcode_sdk
   fi
   # if [[ "${TRAVIS_OS_NAME}" == "windows" ]]; then
@@ -27,6 +27,7 @@ before_script:
   # fi
 
 script:
+- ls /Library/Frameworks/CsoundLib64.framework/
 - |
   if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
     mkdir build
