@@ -16,9 +16,6 @@ before_script:
 - cd Csound
 - sudo installer -pkg csound6.11.0-OSX-universal.pkg -target /
 - sudo install_name_tool -id /Library/Frameworks/CsoundLib64.framework/CsoundLib64  /Library/Frameworks/CsoundLib64.framework/CsoundLib64
-- cd /Users/travis/build/rorywalsh/
-- git clone https://github.com/rorywalsh/opcode_sdk.git
-- touch JUCE/
 - cd /Users/travis/build/rorywalsh/opcode_sdk
 
 script:
