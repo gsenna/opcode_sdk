@@ -30,11 +30,11 @@ before_script:
   #   7z.exe x csound-windows_x64-6.11.0.zip -o"C:/Program Files"
   # fi
 
-script:
-- |
-  if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-    mkdir build
-    cd build
-    cmake ..
-    make -j4
-  fi
+# script:
+# - |
+#   if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+#     mkdir build
+#     cd build
+#     cmake ..
+#     make -j4
+#   fi
