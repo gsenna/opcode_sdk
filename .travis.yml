@@ -20,6 +20,6 @@ before_script:
 
 script:
 - mkdir build
-- cd mkdir
+- cd build
 - cmake ..
 - make -j4
