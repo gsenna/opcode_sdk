@@ -4,5 +4,4 @@ os:
   - windows
 
 before_script:
-- where cmake
 - cmake
