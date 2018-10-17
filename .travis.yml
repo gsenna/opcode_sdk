@@ -13,4 +13,4 @@ script:
 - mkdir build
 - cd build
 - cmake ..
-- msbuild Project.sln
+- ls -l
