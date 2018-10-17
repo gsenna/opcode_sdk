@@ -4,14 +4,5 @@ os:
   - windows
 
 before_script:
-- ls -l
-- curl -L -o csound-windows_x64-6.11.0.zip "https://github.com/csound/csound/releases/download/6.11.0/csound-windows_x64-6.11.0.zip"
-- ls -l
-- 7z x csound-windows_x64-6.11.0.zip -o"C:/Program Files"
-
-script:
-- mkdir build
-- cd build
 - where cmake
-- cmake ..
-- ls -l
+- cmake
