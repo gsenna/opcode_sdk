@@ -5,9 +5,14 @@ os:
 
 before_script:
 - ls -l
-- pwd
+- cd C:\
 - curl -L -o csound-windows_x64-6.11.0.zip "https://github.com/csound/csound/releases/download/6.11.0/csound-windows_x64-6.11.0.zip"
 - ls -l
 - 7z x csound-windows_x64-6.11.0.zip -o"C:/Program Files"
-- pwd
-- ls -l
+- cd c:/Users/travis/build/rorywalsh/opcode_sdk
+
+script:
+- mkdir build
+- cd build
+- cmake ..
+- msbuild Project.sln
