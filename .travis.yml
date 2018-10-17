@@ -12,5 +12,6 @@ before_script:
 script:
 - mkdir build
 - cd build
+- where cmake
 - cmake ..
 - ls -l
