@@ -2,8 +2,6 @@ os:
   - windows
   - osx
 
-language: cpp
-
 compiler: clang
 before_script:
 - |
