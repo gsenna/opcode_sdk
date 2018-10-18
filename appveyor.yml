@@ -31,7 +31,7 @@ before_build:
   cmd: msbuild c:/opcodes/build/Project.sln /p:Configuration=Release /property:Platform=x64
 
 after_build:
-  - 7z l opcodes.zip
+  - 7z a opcodes.zip %APPVEYOR_BUILD_FOLDER%\build\Debug\*.dll
 
 artifacts:
   - path: opcodes.zip
