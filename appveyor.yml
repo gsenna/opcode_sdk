@@ -21,7 +21,7 @@ install:
   - cmd: 7z.exe x csound-windows_x64-6.11.0.zip -o"C:/Program Files"
   - cmd: cd c:/opcodes
   - cmd: mkdir build
-  - cmd: cd build
+  - cmd: cd build  
   - cmd: cmake -G "Visual Studio 15 2017 Win64" ..
 
 build:
