@@ -36,6 +36,6 @@ after_build:
   - ls
 
 artifacts:
-  - path: opcodes.zip
+  - path: c:/opcodes/build/opcodes.zip
     name: Opcode libraries
     type: zip
