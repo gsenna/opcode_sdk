@@ -22,7 +22,7 @@ install:
   - cmd: cd c:/opcodes
   - cmd: mkdir build
   - cmd: cd build
-  - cmd: cmake ..
+  - cmd: cmake --build build64 --config Release ..
 
 build:
   project: c:/opcodes/build/Cabbage.sln
