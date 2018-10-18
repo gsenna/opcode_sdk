@@ -28,7 +28,7 @@ build:
   project: c:/opcodes/build/Cabbage.sln
 
 before_build:
-  cmd: msbuild c:/opcodes/build/Project.sln
+  cmd: msbuild c:/opcodes/build/Project.sln /p:Configuration=Release /property:Platform=x64
 
 after_build:
   - 7z l opcodes.zip
