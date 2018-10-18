@@ -25,7 +25,7 @@ install:
   - cmd: cmake -G "Visual Studio 15 2017 Win64" ..
 
 build:
-  project: c:/opcodes/build/Cabbage.sln
+  project: c:/opcodes/build/Project.sln
 
 before_build:
   cmd: msbuild c:/opcodes/build/Project.sln /p:Configuration=Release /property:Platform=x64
