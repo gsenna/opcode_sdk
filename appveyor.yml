@@ -25,6 +25,9 @@ install:
   - cmd: cmake ..
 
 build:
+  project: c:/opcodes/build/Cabbage.sln
+
+before_build:
   cmd: msbuild c:/opcodes/build/Project.sln
 
 after_build:
