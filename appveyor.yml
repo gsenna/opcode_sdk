@@ -1,0 +1,36 @@
+image: Visual Studio 2017
+
+version: configuring.{build}
+configuration:
+- Debug
+
+environment:
+  VSTOOLSET: v141
+
+
+platform:
+- x64
+
+clone_folder: c:\opcodes
+
+# scripts that run after cloning repository
+install:
+  - cmd: dir
+  - cmd: cd c:/
+  - ps: Start-FileDownload 'https://github.com/csound/csound/releases/download/6.11.0/csound-windows_x64-6.11.0.zip'
+  - cmd: 7z.exe x csound-windows_x64-6.11.0.zip -o"C:/Program Files"
+  - cmd: cd c:/opcodes
+  - cmd: mkdir build
+  - cmd: cd build
+  - cmd: cmake ..
+
+build:
+  cmd: msbuild c:/opcodes/build/Project.sln
+
+after_build:
+  - 7z l opcodes.zip
+
+artifacts:
+  - path: opcodes.zip
+    name: Opcode libraries
+    type: zip
