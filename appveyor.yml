@@ -32,6 +32,8 @@ before_build:
 
 after_build:
   - 7z a opcodes.zip %APPVEYOR_BUILD_FOLDER%\build\Debug\*.dll
+  - pwd
+  - ls
 
 artifacts:
   - path: opcodes.zip
