@@ -31,4 +31,4 @@ deploy:
   file: libstrtoarr.dylib
   skip_cleanup: true
   on:
-    tags: true
+    tags: false
