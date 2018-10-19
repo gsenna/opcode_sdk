@@ -7,7 +7,6 @@ before_script:
 - gem install xcpretty-travis-formatter
 - git remote rm origin
 - cd ..
-#grab latest Csound
 - curl -L -o csound6.11.0-OSX-universal.dmg 'https://github.com/csound/csound/releases/download/6.11.0/csound6.11.0-OSX-universal.dmg'
 - ls
 - hdiutil attach csound6.11.0-OSX-universal.dmg
@@ -17,17 +16,18 @@ before_script:
 - sudo installer -pkg csound6.11.0-OSX-universal.pkg -target /
 - sudo install_name_tool -id /Library/Frameworks/CsoundLib64.framework/CsoundLib64  /Library/Frameworks/CsoundLib64.framework/CsoundLib64
 - cd /Users/travis/build/rorywalsh/opcode_sdk
-
 script:
 - mkdir build
 - cd build
 - cmake ..
 - make -j4
-
 deploy:
   provider: releases
-  api_key: "GITHUB OAUTH TOKEN"
-  file: /Users/travis/build/rorywalsh/opcode_sdk/build/libstrtoarr.dylib
+  api_key: 
+    secure: E+pk9xa/9AYthC61g0CA6Z1nBzVEn6Y4RA0U1l6WPREm6uf5vb5DKEswX1fVQPD8xHQnMHrn0lfZyjsTsP3gpIicgKVMnDTHlpI1MH9IppQyluykPkO7C6nPDjOlhjU3IcO3Fdfnb9XI4gsPyHUGQuAM4QL1g5DXLTlICURgcmFUAK0jk3+aLJXfPvI1tfukwp7HIdqgXreNRBWDpbp9k195ZCoCIOs7ywXr58OwT/9khAsBtaaDxfjPXfC97C85iK48rl+h59h97AdSfbUScRTFClbwOK0nYbP9+WMadCrAIotedwM57xeedQK+MpOkZtyW0nyChjm5mjFCnU0YkWKhxGYbRsQSAdi/fTtgVkIUNc9SzUO1UKfJkbDrvJ18h4ynZd8GJieuwfVu2vbQswKZ6+NLoJV9NQQdP/zsKGdP7oC9nrnQHkrWeLXD2ZL2TxwP/+UmmlIYKiQIv61Y/T/VU0DKta0cNBtDChri501VDDMASoQ3utGBs6EV8x6loI83Vll8GBX57um4d4/FCBe9WGECJzmsCj9RcIjafAqiMYu9WDuRdQtRqXFfQ0FjDgE5CgK/N1dZeCUmwqtPRrBke2T95BJdcVul6Z2FanZ+nk6lCw6nb752GIIwxFDwV4BtE+QuIK1woaat4RmuFX4mloUOC/0QD5Q+8y5J93s=
+  file: "/Users/travis/build/rorywalsh/opcode_sdk/build/libstrtoarr.dylib"
   skip_cleanup: true
   on:
     tags: false
+
+    
