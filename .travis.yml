@@ -21,6 +21,17 @@ script:
 - cd build
 - cmake ..
 - make -j4
+
+before_deploy:
+  - cd /Users/travis/build/rorywalsh/cabbage/
+  - git remote add origin https://rorywalsh:${GH_TOKEN}@github.com/rorywalsh/opcode_sdk.git
+  - git config credential.helper "store --file=.git/credentials"
+  - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+  - git tag -d latestRelease
+  - git push --force origin :refs/tags/latestRelease
+  - git tag vBeta -a -m "Latest OSX Release Build"
+  - git push origin master && git push origin master --tags
+
 deploy:
   provider: releases
   api_key: $github_token
@@ -28,6 +39,7 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+    all_branches: true
 env:
   global:
     secure: E+pk9xa/9AYthC61g0CA6Z1nBzVEn6Y4RA0U1l6WPREm6uf5vb5DKEswX1fVQPD8xHQnMHrn0lfZyjsTsP3gpIicgKVMnDTHlpI1MH9IppQyluykPkO7C6nPDjOlhjU3IcO3Fdfnb9XI4gsPyHUGQuAM4QL1g5DXLTlICURgcmFUAK0jk3+aLJXfPvI1tfukwp7HIdqgXreNRBWDpbp9k195ZCoCIOs7ywXr58OwT/9khAsBtaaDxfjPXfC97C85iK48rl+h59h97AdSfbUScRTFClbwOK0nYbP9+WMadCrAIotedwM57xeedQK+MpOkZtyW0nyChjm5mjFCnU0YkWKhxGYbRsQSAdi/fTtgVkIUNc9SzUO1UKfJkbDrvJ18h4ynZd8GJieuwfVu2vbQswKZ6+NLoJV9NQQdP/zsKGdP7oC9nrnQHkrWeLXD2ZL2TxwP/+UmmlIYKiQIv61Y/T/VU0DKta0cNBtDChri501VDDMASoQ3utGBs6EV8x6loI83Vll8GBX57um4d4/FCBe9WGECJzmsCj9RcIjafAqiMYu9WDuRdQtRqXFfQ0FjDgE5CgK/N1dZeCUmwqtPRrBke2T95BJdcVul6Z2FanZ+nk6lCw6nb752GIIwxFDwV4BtE+QuIK1woaat4RmuFX4mloUOC/0QD5Q+8y5J93s=
