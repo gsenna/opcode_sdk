@@ -13,39 +13,48 @@
 #include <modload.h>
 #include <iostream>
 #include <fstream>
+#include "dirent.h"
 
 //removes a number of occurrences of one string from another
-struct StrToFile : csnd::Plugin<1, 2> 
+struct StrToFile : csnd::Plugin<0, 3> 
 {  
   int init() 
   {
-    return parseStringAndFillStruct(this);
-  }
+    // DIR *dir = opendir(".");
+    // if (dir) {
+    //   struct dirent *ent;
+    //   while ((ent = readdir(dir)) != NULL) {
+    //     csound->message(ent->d_dir);
+    //   }
+    // }
 
-  int kperf() 
-  {
-    return parseStringAndFillStruct(this);
-  }
-
-  int parseStringAndFillStruct(Plugin* opcodeData)
-  {
-
-    if (opcodeData->in_count()<3)
+    if (in_count()<2)
     {
         csound->message("You did not pass have enough arguments to strtofile\n");
         return NOTOK;
     }
 
-    char* fileName = opcodeData->inargs.str_data(1).data;
-    char* inString = opcodeData->inargs.str_data(2).data;
-    int mode = opcodeData->inargs[0];
+    char* fileName = inargs.str_data(0).data;
+    char* inString = inargs.str_data(1).data;
+    int mode = inargs[2];
+
     std::ofstream fileStream;
-    if (mode == 0)
-        fileStream.open ("example.txt", std::ios::in|std::ios::trunc);
+
+    if (mode == 1)
+    {
+        fileStream.open (fileName, std::ios::in|std::ios::app);
+    }
     else
-        fileStream.open ("example.txt", std::ios::in|std::ios::app);
+        fileStream.open (fileName, std::ios::in|std::ios::trunc);
 
     fileStream << inString;
+
+    if(!fileStream.is_open())
+    {
+      csound->message("*** strtofile could not open file for writing ***");
+      return NOTOK;
+    }
+    
     fileStream.close();
 
     return OK;
@@ -54,6 +63,6 @@ struct StrToFile : csnd::Plugin<1, 2>
   
 void csnd::on_load(Csound *csound) 
 {
-  csnd::plugin<StrToFile>(csound, "strremove.ii", "S", "SSo", csnd::thread::i);
+  csnd::plugin<StrToFile>(csound, "strtofile.ii", "", "SSi", csnd::thread::i);
 }
 
