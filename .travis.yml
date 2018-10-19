@@ -22,14 +22,14 @@ script:
 - cmake ..
 - make -j4
 
-before_deploy:
+after_script:
   - cd /Users/travis/build/rorywalsh/opcode_sdk
   - git remote add origin https://rorywalsh:${github_token}@github.com/rorywalsh/opcode_sdk.git
   - git config credential.helper "store --file=.git/credentials"
   - echo "https://${github_token}:@github.com" > .git/credentials
   - git tag -d latestBinaries
   - git push --force origin :refs/tags/latestBinaries
-  - git tag vBeta -a -m "Latest OSX Release Build"
+  - git tag latestBinaries -a -m "Latest OSX Release Build"
   - git push origin master && git push origin master --tags
 
 deploy:
