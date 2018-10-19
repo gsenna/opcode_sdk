@@ -13,14 +13,9 @@
 #include <vector>
 
 //opcode version of the StrToArr UDO written by Joachim Heintz
-struct StrToArray : csnd::Plugin<2, 2> {
+struct StrToArray : csnd::Plugin<1, 2> {
   
   int init() 
-  {
-    return parseStringAndFillStruct(this);
-  }
-
-  int kperf() 
   {
     return parseStringAndFillStruct(this);
   }
@@ -52,11 +47,9 @@ struct StrToArray : csnd::Plugin<2, 2> {
     
     for ( int i = 0 ; i < tokens.size() ; i++)
     {
-      csound->message(tokens[i].c_str());
       out[i].data = csound->strdup((char*)tokens[i].c_str());
     }
 
-    outargs[1] = (int)tokens.size(); 
     tokens.clear();
     return OK;
   }
@@ -64,7 +57,6 @@ struct StrToArray : csnd::Plugin<2, 2> {
 
 void csnd::on_load(Csound *csound) 
 {
-  csnd::plugin<StrToArray>(csound, "strtoarray.kk", "S[]k", "SS", csnd::thread::k);
-  csnd::plugin<StrToArray>(csound, "strtoarray.ii", "S[]i", "SS", csnd::thread::i);
+  csnd::plugin<StrToArray>(csound, "strtoarray.ii", "S[]", "SS", csnd::thread::i);
 }
 

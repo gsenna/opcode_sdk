@@ -20,11 +20,6 @@ struct StrRemove : csnd::Plugin<1, 3>
     return parseStringAndFillStruct(this);
   }
 
-  int kperf() 
-  {
-    return parseStringAndFillStruct(this);
-  }
-
   int parseStringAndFillStruct(Plugin* opcodeData)
   {
     int occurrences = -1;
