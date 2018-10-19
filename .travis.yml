@@ -23,7 +23,7 @@ script:
 - make -j4
 
 before_deploy:
-  - cd /Users/travis/build/rorywalsh/cabbage/
+  - cd /Users/travis/build/rorywalsh/opcode_sdk
   - git remote add origin https://rorywalsh:${GH_TOKEN}@github.com/rorywalsh/opcode_sdk.git
   - git config credential.helper "store --file=.git/credentials"
   - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
@@ -38,7 +38,7 @@ deploy:
   file: "/Users/travis/build/rorywalsh/opcode_sdk/build/libstrtoarr.dylib"
   skip_cleanup: true
   on:
-    repo: rorywalsh/cabbage
+    repo: rorywalsh/opcode_sdk
     tags: false
     all_branches: true
     
