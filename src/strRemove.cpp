@@ -56,6 +56,6 @@ struct StrRemove : csnd::Plugin<1, 3>
   
 void csnd::on_load(Csound *csound) 
 {
-  csnd::plugin<StrStrip>(csound, "strremove.ii", "S", "SSo", csnd::thread::i);
+  csnd::plugin<StrRemove>(csound, "strremove.ii", "S", "SSo", csnd::thread::i);
 }
 
