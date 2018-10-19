@@ -23,7 +23,7 @@ script:
 - make -j4
 deploy:
   provider: releases
-  api_key: "github_token"
+  api_key: $github_token
   file: "/Users/travis/build/rorywalsh/opcode_sdk/build/libstrtoarr.dylib"
   skip_cleanup: true
   on:
