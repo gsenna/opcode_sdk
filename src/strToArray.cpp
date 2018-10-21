@@ -12,7 +12,9 @@
 #include <string>
 #include <vector>
 
+//==========================================================
 //opcode version of the StrToArr UDO written by Joachim Heintz
+//==========================================================
 struct StrToArray : csnd::Plugin<1, 2> {
   
   int init() 

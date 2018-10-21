@@ -11,11 +11,12 @@
 #include <string>
 #include <vector>
 #include <modload.h>
-#include <iostream>
 #include <fstream>
-#include "dirent.h"
 
+
+//==========================================================
 //removes a number of occurrences of one string from another
+//==========================================================
 struct StrToFile : csnd::Plugin<0, 3> 
 {  
   int init() 

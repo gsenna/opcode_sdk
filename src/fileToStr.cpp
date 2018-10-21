@@ -12,7 +12,9 @@
 #include <modload.h>
 #include <fstream>
 
+//==========================================================
 //removes a number of occurrences of one string from another
+//==========================================================
 struct FileToStr : csnd::Plugin<1, 1> 
 {  
   int init() 
