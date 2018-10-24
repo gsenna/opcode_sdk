@@ -15,28 +15,33 @@ struct TrigExpseg : csnd::Plugin<1, 64>
 {  
     int init() 
     {
-        int iCnt = 1;
-        totalLength = 0;
+        int argCnt = 1;
         samplingRate = csound->sr();
         playEnv = 0;
         counter = 0;
         outargs[0] = inargs[1];
         segment = 0;
-        outValue = 0;
+        outValue = inargs[1];
 
-        while(iCnt<in_count())
+        while(argCnt<in_count())
         {
-            if(iCnt%2==0)
-                durations.push_back(inargs[iCnt]*samplingRate);
+            if(argCnt%2==0)
+                durations.push_back(inargs[argCnt]*samplingRate);
             else
-                values.push_back(inargs[iCnt]);
+            {
+                if(inargs[argCnt]<=0.0)
+                {
+                    csound->message("iVal is 0");
+                    return NOTOK;
+                }
 
-            iCnt++;
+                values.push_back(inargs[argCnt]);
+            }               
+
+            argCnt++;
         }
 
-        csound->message("===TOtal lenth====");
-        totalLength = std::accumulate(durations.begin(), durations.end(), 0);
-        csound->message(std::to_string(totalLength));
+        incr = pow(values[1]/values[0], 1/(durations[0]));
         
         return OK;
     }
@@ -61,19 +66,18 @@ struct TrigExpseg : csnd::Plugin<1, 64>
         if (opcodeData->inargs[0] == 1)
             playEnv = 1;
 
-
         if (playEnv == 1 && segment<=durations.size())
         {
             if(counter<durations[segment])
             {
-                //csound->message(std::to_string(counter));
-                outValue = pow((counter/durations[segment]) - values[segment], 2.0);
+                outValue *= incr;
                 counter+=sampIncr;
             }
             else
             {
                 segment++;
                 counter = 0;
+                incr = pow(values[segment+1]/values[segment], 1/(durations[segment]));
             }
         }
         else
@@ -86,8 +90,8 @@ struct TrigExpseg : csnd::Plugin<1, 64>
         return outValue;
     }
 
-    int samplingRate, playEnv, counter, totalLength, segment;
-    MYFLT outValue;
+    int samplingRate, playEnv, counter, segment;
+    MYFLT outValue, incr;
     std::vector<MYFLT> values;
     std::vector<MYFLT> durations;  
 };

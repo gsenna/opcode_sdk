@@ -34,7 +34,7 @@ struct TrigLinseg : csnd::Plugin<1, 64>
             iCnt++;
         }
 
-        csound->message("===TOtal lenth====");
+        incr = (values[1]-values[0]) / durations[0];
         totalLength = std::accumulate(durations.begin(), durations.end(), 0);
         csound->message(std::to_string(totalLength));
         
@@ -61,19 +61,18 @@ struct TrigLinseg : csnd::Plugin<1, 64>
         if (opcodeData->inargs[0] == 1)
             playEnv = 1;
 
-
         if (playEnv == 1 && segment<=durations.size())
         {
             if(counter<durations[segment])
             {
-                //csound->message(std::to_string(counter));
-                outValue = values[segment]+((values[segment+1] - values[segment]) * counter/durations[segment]);
+                outValue *= incr;
                 counter+=sampIncr;
             }
             else
             {
                 segment++;
                 counter = 0;
+                incr = (values[segment+1]-values[segment]) / durations[0];
             }
         }
         else
@@ -87,7 +86,7 @@ struct TrigLinseg : csnd::Plugin<1, 64>
     }
 
     int samplingRate, playEnv, counter, totalLength, segment;
-    MYFLT outValue;
+    MYFLT outValue, incr;
     std::vector<MYFLT> values;
     std::vector<MYFLT> durations;  
 };
